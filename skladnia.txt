@@ -1,0 +1,108 @@
+def main() {
+	// komentarz
+	/* kom
+	entarz
+	*/
+	
+	var myInt: int = 6;
+	var myString: string = "hello";
+	var myDouble: doube = 3.14;
+	var myBoolean: boolean = true;
+
+	var myMoveable: moveable = ((1,2),(3,4),(5,6)); //((położenieX,położenieY),(prękośćX,prękośćY),(przyspieszenieX,przyspieszenieY))
+	print(myMoveable.posX); // 1
+	print(myMoveable.speedX); // 3
+	print(myMoveable.accX); // 5 
+	var myPosition: position = (2,3);
+	print(myPosition.x); // 2
+	print(myPosition.y); // 3
+
+	// obiekt singleton globalny dla całego programu, steruje 'czasem' w ruchu wszystkich obiektów
+	// zmieniając wartość globalTime poruszamy wszystkimi zdefiniowanymi instancjami typu moveable(także zmieniamy prędkości obiektów o niezerowym przyspieszeniu)
+	// można się zastanowić nad możliwością definiowania tych czasów dla zbioru obiektów, zamiast jednej globalnej
+	moveable.globalTime = 0;
+
+	var myMoveable2: moveable = ((0,0),(1,0),(0,0));
+	globalTime += 1;
+	print(myMoveable2.posX); // 1
+	print(myMoveable2.posY); // 0
+
+	var myMoveable3: moveable = ((0,0),(1,0),(0,0));
+	var myMoveable4: moveable = ((10,0),(-1,0),(0,0)) ;
+
+	moveable.setOnCollision(myMoveable3, myMoveable4, onCollisionFun);
+	
+	globalTime += 4;
+	globalTime += 1;
+	// zostanie zawołana funkcja onCollisionFun(myMoveable3, myMoveable4, (5,0), 6)
+
+	// dodatkowe możliwości typu danych moveable, pozwalające na rozsądne zarządzanie tymi obiektami
+	myMoveable.id = 12;
+	myMoveable.name = "nazwa konkretnego obiektu";
+
+	var myBoolean1: boolean = false;
+	if(myBoolean1 && 2 < 4){
+		print("true");
+	}else{
+		print("false");
+	}
+	
+	for(x: int; x < 10; x += 1){
+		print(x + " ");
+	}
+
+	var a: int = 2;
+	var b: int = 3;
+	var c: int = 4;
+	print(a + b * c); // 14
+	print((a + b) * c); // 24
+
+	var myStr: string = "hello";
+	var myStr2: string = " world";
+	var myStr3: string = myStr + myStr2; // "hello world"
+	var myStr4: string = myStr + a; // "hello2"
+
+	/* ==== obsługa błędów === */
+	myStr = 3; // type mismatch
+	myStr * 3; // undefined operand '*' for string and int
+	if(false {		// ')' expected
+		print("abc");
+	}
+	var myInt5 = 8; // type not specified
+	myMoveable.nmae = "abc"; // 'nmae' field not undefined
+	// program bez funkcji 'main': function 'main' not defined
+
+	var d: int
+	d = sayHello(); // incompatible types: void cannot be converted to int
+}
+
+def sayHello() {
+	print("hello world");
+	// nic nie zwraca
+}
+
+def mullBy2(myInt: int): int {
+	return myInt * 2
+}
+
+def onCollisionFun(mov1: moveable, mov2: moveable, pos: position, time: int) {
+	print("zderzenie obiketu: " + mov1.name + ", z obiektem: " + mov2.name + ", w miejscu:" + pos + ", w czasie: " + time)
+}
+
+def retTrue(): boolean {
+	print("ret true");
+	return true;
+}
+
+def retFalse(): boolean {
+	print("ret false");
+	return false;
+}
+
+def sumOfArray(myArray: int[], size: int): int {
+	var sum: int = 0;
+	for(var i: int = 0; i < size; i += 1){
+		sum += myArray[i];
+	}
+	return sum;
+}
