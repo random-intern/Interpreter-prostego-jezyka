@@ -98,11 +98,3 @@ def retFalse(): boolean {
 	print("ret false");
 	return false;
 }
-
-def sumOfArray(myArray: int[], size: int): int {
-	var sum: int = 0;
-	for(var i: int = 0; i < size; i += 1){
-		sum += myArray[i];
-	}
-	return sum;
-}
